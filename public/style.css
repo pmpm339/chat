@@ -1,0 +1,26 @@
+*
+{
+    box-sizing: border-box;
+}
+input,
+button
+{
+    border:1px solid #ccc;
+    font-size:5vw;
+    line-height:7vw;
+    height:10vw;
+    padding:0 5vw;
+    outline: 0;
+}
+input
+{
+    border-radius:5vw 0 0 5vw;
+}
+button
+{
+    border-radius:0 5vw 5vw 0;
+}
+#chats
+{
+    font-size:5vw;
+}
