@@ -30,3 +30,7 @@ button
 {
     font-size:5vw;
 }
+#form
+{
+    display:none;
+}
