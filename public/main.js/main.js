@@ -12,6 +12,10 @@ nameform.addEventListener('submit', function(event){
   event.preventDefault();
   nameform.style.display ="none";
   form.style.display ="block";
+
+  const msg = JSON.stringify({msg: username + ' さんが参加しました。', name: 'システム'})
+  socketio.emit('message', msg);
+
 })
 
 form.addEventListener('submit', function(event){
@@ -20,6 +24,7 @@ form.addEventListener('submit', function(event){
   input.value='';
   event.preventDefault();
 })
+
 socketio.on('message',function(msg){
   const obj = JSON.parse(msg);
 
