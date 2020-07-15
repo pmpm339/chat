@@ -26,6 +26,10 @@ form.addEventListener('submit', function(event){
 })
 
 socketio.on('message',function(msg){
+  if(username===''){
+    // まだ参加していなかったら、チャットを表示しない
+    return;
+  }
   const dt = document.createElement("dt");
   const dd = document.createElement("dd");
   dt.append(msg.name);
