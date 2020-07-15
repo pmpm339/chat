@@ -40,7 +40,7 @@ button
     padding:1vw 3vw;
     display: inline-block;
 }
-#chats dd
+#chats dt+dd
 {
     margin-left: 8vw;
     position: relative;
@@ -48,7 +48,13 @@ button
     border-radius:3vw;
     padding:1vw 3vw;
 }
-#chats dd::before
+#chats dd+dd
+{
+    margin-left: 10vw;
+    font-size:2.5vw;
+}
+
+#chats dt+dd::before
 {
     content: '';
     display: block;
