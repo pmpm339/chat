@@ -29,7 +29,10 @@ process.on("SIGTERM", function () {
 // 過去メッセージをファイルから読み込み
 // ファイルが無くてエラーになる場合もあるので try...catch でエラー回避
 try {
-    messages = JSON.parse(fs.readFileSync('.data/data.json'));
+    // messages変数が空の時だけ、ファイルから過去ログを読み込む
+    if(messages.length===0){
+        messages = JSON.parse(fs.readFileSync('.data/data.json'));
+    }
 }
 catch {
 
