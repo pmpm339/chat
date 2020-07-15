@@ -50,8 +50,11 @@ socketio.on('signin',function(msgs){
 function displayMessage(msg){
   const dt = document.createElement("dt");
   const dd = document.createElement("dd");
+  const dd2 = document.createElement("dd");
   dt.append(msg.name);
   chats.append(dt);
   dd.append(msg.msg);
   chats.append(dd);
+  dd2.append(new Date(msg.date));
+  chats.append(dd2);
 }
