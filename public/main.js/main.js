@@ -8,20 +8,24 @@ const name = document.getElementById("name");
 
 let username='';
 nameform.addEventListener('submit', function(event){
-  username = name.value;
+  if(name.value!==''){
+    username = name.value;
+    nameform.style.display ="none";
+    form.style.display ="block";
+
+    const msg = {msg: username + ' さんが参加しました。', name: 'システム'};
+    socketio.emit('message', msg);
+  }
+
   event.preventDefault();
-  nameform.style.display ="none";
-  form.style.display ="block";
-
-  const msg = {msg: username + ' さんが参加しました。', name: 'システム'};
-  socketio.emit('message', msg);
-
 })
 
 form.addEventListener('submit', function(event){
-  const msg = {msg: input.value, name: username};
-  socketio.emit('message', msg);
-  input.value='';
+  if(input.value!==''){
+    const msg = {msg: input.value, name: username};
+    socketio.emit('message', msg);
+    input.value='';
+  }
   event.preventDefault();
 })
 
