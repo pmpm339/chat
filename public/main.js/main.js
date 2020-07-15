@@ -13,6 +13,8 @@ nameform.addEventListener('submit', function(event){
     nameform.style.display ="none";
     form.style.display ="block";
 
+    socketio.emit('signin');
+
     const msg = {msg: username + ' さんが参加しました。', name: 'システム'};
     socketio.emit('message', msg);
   }
@@ -40,4 +42,17 @@ socketio.on('message',function(msg){
   chats.append(dt);
   dd.append(msg.msg);
   chats.append(dd);
+});
+
+// 参加時に過去のメッセージを受け取る
+socketio.on('signin',function(msgs){
+  for(let i=0;i<msgs.length;i++){
+    const msg = msgs[i];
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.append(msg.name);
+    chats.append(dt);
+    dd.append(msg.msg);
+    chats.append(dd);
+  }
 });
