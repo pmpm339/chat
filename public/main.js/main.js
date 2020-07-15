@@ -13,25 +13,23 @@ nameform.addEventListener('submit', function(event){
   nameform.style.display ="none";
   form.style.display ="block";
 
-  const msg = JSON.stringify({msg: username + ' さんが参加しました。', name: 'システム'})
+  const msg = {msg: username + ' さんが参加しました。', name: 'システム'};
   socketio.emit('message', msg);
 
 })
 
 form.addEventListener('submit', function(event){
-  const msg = JSON.stringify({msg: input.value, name: username})
+  const msg = {msg: input.value, name: username};
   socketio.emit('message', msg);
   input.value='';
   event.preventDefault();
 })
 
 socketio.on('message',function(msg){
-  const obj = JSON.parse(msg);
-
   const dt = document.createElement("dt");
   const dd = document.createElement("dd");
-  dt.append(obj.name);
+  dt.append(msg.name);
   chats.append(dt);
-  dd.append(obj.msg);
+  dd.append(msg.msg);
   chats.append(dd);
 });
