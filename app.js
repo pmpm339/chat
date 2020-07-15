@@ -2,11 +2,33 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const fs = require('fs');
 const PORT = 3000;
 
 app.use(express.static('public'));
 
 let messages = []; // 過去のメッセージを保存しておく配列
+
+// プログラム終了時に過去メッセージをファイルに保存
+process.on('exit', function (code) {
+    fs.writeFileSync('data.json', JSON.stringify(messages));
+    console.log('Exiting');
+});
+process.on("SIGINT", function () {
+    process.exit(0);
+});
+process.on("SIGTERM", function () {
+    process.exit(0);
+});
+
+// 過去メッセージをファイルから読み込み
+// ファイルが無くてエラーになる場合もあるので try...catch でエラー回避
+try {
+    messages = JSON.parse(fs.readFileSync('data.json'));
+}
+catch {
+
+}
 
 io.on('connection',function(socket){
     socket.on('signin',function(){
